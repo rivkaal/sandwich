@@ -3,24 +3,18 @@ package com.example.sandwich
 import java.io.Serializable
 import java.util.*
 
-class Order : Serializable {
+data class Order(
+    var customer_name: String = "",
+    var pickles: Int = 0,
+    var hummus: Boolean = false,
+    var tahini: Boolean = false,
+    var comment: String = ""
+) : Serializable {
     var id = ""
-    var customer_name = ""
-    var pickles = 0
-    var hummus = false
-    var tahini = false
-    var comment = ""
     var status = "waiting"
 
-    constructor( customer_name:String = "", pickles:Int = 0,
-    hummus:Boolean = false, tahini:Boolean = false, comment:String = "")
-    {
+    init {
         id = UUID.randomUUID().toString()
-        this.customer_name = customer_name
-        this.pickles = pickles
-        this.hummus = hummus
-        this.tahini = tahini
-        this.comment = comment
     }
 
 }
