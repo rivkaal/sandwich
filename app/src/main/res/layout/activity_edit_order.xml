@@ -21,6 +21,12 @@
         android:layout_height="wrap_content"
         android:hint="Enter your name"/>
 
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="how many pickles you want?"/>
+
     <EditText
         android:id="@+id/pickles"
         android:layout_width="match_parent"

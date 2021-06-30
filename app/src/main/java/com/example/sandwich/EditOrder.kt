@@ -3,10 +3,7 @@ package com.example.sandwich
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.EditText
-import android.widget.ProgressBar
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.google.firebase.firestore.DocumentSnapshot
@@ -21,6 +18,13 @@ class EditOrder : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()
     val ref = db.collection("orders").document(order.id)
 
+    private fun changeToReadyScreen() {
+        val text = findViewById<TextView>(R.id.text)
+        val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
+        text.text = "your order is ready!!!"
+        progressBar.visibility = View.GONE
+    }
+
     private fun changeToProgressScreen() {
         val name = findViewById<EditText>(R.id.customerName)
         val pickles = findViewById<EditText>(R.id.pickles)
@@ -30,6 +34,8 @@ class EditOrder : AppCompatActivity() {
         val buttonChangeOrder = findViewById<Button>(R.id.change_order)
         val buttonSaveChanges = findViewById<Button>(R.id.save_changes)
         val progressBar = findViewById<ProgressBar>(R.id.progress_bar)
+        val text = findViewById<TextView>(R.id.text)
+        text.text = "please wait, your order is in progress"
         name.visibility = View.GONE
         pickles.visibility = View.GONE
         comment.visibility = View.GONE
@@ -57,6 +63,10 @@ class EditOrder : AppCompatActivity() {
                     if(status == "in progress")
                     {
                         changeToProgressScreen()
+                    }
+                    else if(status == "ready")
+                    {
+                        changeToReadyScreen()
                     }
                 }
             }
